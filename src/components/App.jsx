@@ -1,14 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Note from "./Note";
-import notes from "../notes";
+import InputForm from "./InputForm";
 
 function App() {
+
+  const [notes, setNotes] = useState([]);
+
+  function addNote() {}
+
   return (
     <div>
       <Header />
-      {notes.map(note => <Note key={note.key} title={note.title} content={note.content}/>)}
+      <InputForm />
       <Footer />
     </div>
   );
