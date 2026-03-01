@@ -1,11 +1,10 @@
 import React, {useState} from "react";
-import Note from "./Note";
 
-function InputForm() {
+function InputForm(props) {
 
     const [inputText, setInputText] = useState({
         title: "",
-        content: ""
+        content: "",
     });
 
     function handleChange(event) {
@@ -14,17 +13,25 @@ function InputForm() {
         setInputText(prevValue => {
             return {
                 ...prevValue,
-                [name]: value
+                [name]: value,
             };
         });
     }
 
+    function handleSubmit(event) {
+        event.preventDefault();
+        props.onAdd(inputText);
+        setInputText({
+            title: "",
+            content: "",
+        });
+    }
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input onChange={handleChange} name="title" placeholder="Title" value={inputText.title}/>
-                <textarea onChange={handleChange} name="content" placeholder="Take a note..." rows="3" />
-                <button>Add</button>
+                <textarea onChange={handleChange} name="content" placeholder="Take a note..." rows="3" value={inputText.content} />
+                <button type="submit">Add</button>
             </form>
         </div>
     );
